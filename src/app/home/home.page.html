@@ -1,4 +1,12 @@
-<div *ngFor="let c of categorias">
-  <img src="{{c.foto}}" alt="">
-  <h2>{{c.nome}}</h2>
-</div>
+<ion-content>
+  <div *ngFor="let c of categorias">
+    <div class="categoria">
+      <img src="{{c.foto}}" alt="">
+      <h2>{{c.nome}}</h2>
+    </div>
+
+    <div *ngFor="let p of c.produtos">
+      {{p.nome}}
+    </div>
+  </div>
+</ion-content>
