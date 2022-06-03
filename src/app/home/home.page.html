@@ -5,8 +5,17 @@
       <h2>{{c.nome}}</h2>
     </div>
 
-    <div *ngFor="let p of c.produtos">
-      {{p.nome}}
-    </div>
+    <ion-list>
+      <ion-item *ngFor="let p of c.produtos" routerLink="/detalhe" (click)="salvarProduto(p)">
+        <ion-avatar slot="start">
+            <img src="{{ p.foto || 'https://via.placeholder.com/150' }}" alt="">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{p.nome}}</h2>
+          <p>{{p.descricao}}</p>
+          <p><b>{{p.valor | currency: 'BRL'}}</b></p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>

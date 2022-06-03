@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Categoria } from '../categoria';
 import { Produto } from '../produto';
+import { ProdutoEscolhidoService } from '../service/produto-escolhido.service';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,17 @@ export class HomePage {
   BASE_URL = 'http://lucasreno.kinghost.net/delivery';
   categorias: Categoria[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient, 
+    private pe: ProdutoEscolhidoService
+  ) {
     this.pegarDados();
   }
   
+  salvarProduto(p: Produto){
+    this.pe.produto = p;
+  }
+
   pegarDados(){
     this.http.get<Categoria[]>(this.BASE_URL+'/categorias').subscribe(
       resposta => {

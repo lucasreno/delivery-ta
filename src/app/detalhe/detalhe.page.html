@@ -1,9 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>detalhe</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{produto.nome}}</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <div class="detalhe">
+    <img src="{{produto.foto || 'https://via.placeholder.com/350'}}" alt="">
+    <h1>{{produto.nome}}</h1>
+    <p class="desc">{{produto.descricao}}</p>
+    <h3 class="preco">{{produto.valor | currency: 'BRL'}}</h3>
+  </div>
 </ion-content>
