@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
+import { Carrinho } from '../carrinho';
 import { Categoria } from '../categoria';
 import { Produto } from '../produto';
 import { ProdutoEscolhidoService } from '../service/produto-escolhido.service';
@@ -12,14 +14,30 @@ import { ProdutoEscolhidoService } from '../service/produto-escolhido.service';
 export class HomePage {
   BASE_URL = 'http://lucasreno.kinghost.net/delivery';
   categorias: Categoria[] = [];
+  carrinho: Carrinho[] = [];
+  totalCarrinho: number = 0;
 
   constructor(
     private http: HttpClient, 
-    private pe: ProdutoEscolhidoService
+    private pe: ProdutoEscolhidoService,
+    private storage: Storage
   ) {
     this.pegarDados();
   }
+
+  ionViewWillEnter(){
+    this.iniciarBanco();
+  }
   
+  async iniciarBanco(){
+    await this.storage.create();
+    this.carrinho = await this.storage.get('carrinho') ?? [];
+    this.totalCarrinho = 0;
+    this.carrinho.forEach(c => {
+      this.totalCarrinho += c.quantidade * c.produto.valor;
+    });
+  }
+
   salvarProduto(p: Produto){
     this.pe.produto = p;
   }

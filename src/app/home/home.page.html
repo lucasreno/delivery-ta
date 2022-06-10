@@ -8,7 +8,7 @@
     <ion-list>
       <ion-item *ngFor="let p of c.produtos" routerLink="/detalhe" (click)="salvarProduto(p)">
         <ion-avatar slot="start">
-            <img src="{{ p.foto || 'https://via.placeholder.com/150' }}" alt="">
+          <img src="{{ p.foto || 'https://via.placeholder.com/150' }}" alt="">
         </ion-avatar>
         <ion-label>
           <h2>{{p.nome}}</h2>
@@ -17,5 +17,18 @@
         </ion-label>
       </ion-item>
     </ion-list>
+  </div>
+
+  <div *ngIf="carrinho.length > 0">
+    <div class="pb-5"></div>
+    <footer routerLink="/carrinho" class="fixed-bottom bg-light 
+                border-top py-3 d-flex justify-content-between">
+      <div class="fs-2 d-flex align-items-center">
+        <ion-icon name="cart-outline"></ion-icon>
+        <ion-badge>{{carrinho.length}}</ion-badge>
+      </div>
+      <div>Finalizar</div>
+      <div>Total {{ totalCarrinho | currency: 'BRL'}}</div>
+    </footer>
   </div>
 </ion-content>
