@@ -1,9 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>carrinho</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Carrinho</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="carrinho p-3">
 
+    <div class="d-flex justify-content-between mx-3">
+      <div>Itens</div>
+      <div>Preço</div>
+    </div>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let c of carrinho; let i = index">
+        <ion-item>
+          <ion-label>{{c.quantidade}} x {{c.produto.nome}}</ion-label>
+          <div>{{c.produto.valor * c.quantidade | currency: 'BRL'}}</div>
+        </ion-item>
+        <ion-item-options slot="end">
+            <ion-item-option color="danger" (click)="remover(i)">
+              <ion-icon name="trash"></ion-icon>
+            </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <div class="d-flex justify-content-between m-3 fw-bold">
+      <div>Total</div>
+      <div>{{totalCarrinho | currency: 'BRL'}}</div>
+    </div>
+
+  </div>
 </ion-content>
